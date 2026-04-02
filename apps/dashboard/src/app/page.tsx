@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@mono/ui'
 import { Badge } from '@mono/ui'
 
@@ -16,9 +15,12 @@ export default function DashboardPage() {
       <nav className="border-b bg-white/50 dark:bg-slate-900/50 backdrop-blur">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
+            <a
+              href="https://vian-project.pages.dev"
+              className="text-sm text-muted-foreground hover:text-foreground"
+            >
               ← Back to Home
-            </Link>
+            </a>
             <h1 className="text-xl font-bold">Analytics Dashboard</h1>
           </div>
           <Badge variant="outline">Live Demo</Badge>

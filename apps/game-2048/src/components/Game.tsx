@@ -68,7 +68,7 @@ export function Game() {
         {/* Back Link */}
         <div className="mt-6 text-center">
           <a
-            href="/"
+            href="https://vian-project.pages.dev"
             className="text-sm text-muted-foreground hover:text-foreground"
           >
             ← Back to Home

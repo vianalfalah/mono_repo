@@ -16,7 +16,7 @@ export default function LandingPage() {
           </div>
           <div className="flex gap-4">
             <Button variant="ghost" asChild>
-              <a href="/">Home</a>
+              <a href="https://vian-project.pages.dev">Home</a>
             </Button>
             <Button asChild>
               <a href="#contact">Contact</a>
@@ -63,10 +63,10 @@ export default function LandingPage() {
             className="flex gap-4 justify-center"
           >
             <Button size="lg" asChild>
-              <a href="/">View All Projects</a>
+              <a href="https://vian-project.pages.dev">View All Projects</a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="/dashboard">Dashboard Demo</a>
+              <a href="https://mono-repo-dashboard.pages.dev">Dashboard Demo</a>
             </Button>
           </motion.div>
         </div>
