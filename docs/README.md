@@ -9,7 +9,8 @@ Welcome to the monorepo documentation. This folder contains guides for working w
 | [New Project Guide](./NEW_PROJECT.md) | Create a new project in the monorepo |
 | [Migrating Projects](./MIGRATING.md) | Move existing projects into the monorepo |
 | [Shared Packages](./SHARED_PACKAGES.md) | Using and extending shared packages |
-| [Deployment](./DEPLOYMENT.md) | Deploy to Vercel step-by-step |
+| [Vercel Deployment](./DEPLOYMENT.md) | Deploy to Vercel |
+| [Cloudflare Pages Deployment](./CLOUDFLARE_DEPLOYMENT.md) | Deploy to Cloudflare Pages (supports multi-framework!) |
 | [Port Assignments](./PORTS.md) | Development port reference |
 
 ---
