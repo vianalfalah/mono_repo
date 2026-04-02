@@ -1,8 +1,6 @@
 {
   "buildCommand": "pnpm build",
-  "outputDirectory": "apps/home/.next",
   "installCommand": "pnpm install",
-  "framework": "nextjs",
   "rewrites": [
     {
       "source": "/",
