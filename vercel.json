@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/apps/home"
+    },
+    {
+      "source": "/landing-page",
+      "destination": "/apps/landing-page"
+    },
+    {
+      "source": "/landing-page/:match*",
+      "destination": "/apps/landing-page/:match*"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/apps/dashboard"
+    },
+    {
+      "source": "/dashboard/:match*",
+      "destination": "/apps/dashboard/:match*"
+    },
+    {
+      "source": "/game-2048",
+      "destination": "/apps/game-2048"
+    },
+    {
+      "source": "/game-2048/:match*",
+      "destination": "/apps/game-2048/:match*"
+    }
+  ]
+}
