@@ -1,10 +1,11 @@
 {
-  "buildCommand": "pnpm build",
+  "buildCommand": "pnpm turbo build --filter=@mono/home...",
+  "outputDirectory": "apps/home/.next",
   "installCommand": "pnpm install",
   "rewrites": [
     {
       "source": "/",
-      "destination": "/apps/home"
+      "destination": "/index.html"
     },
     {
       "source": "/landing-page",
