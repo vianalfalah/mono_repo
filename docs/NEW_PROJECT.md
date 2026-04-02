@@ -111,7 +111,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3004, // Choose an unused port
+    port: 3005, // Next available port
+    strictPort: true,
   },
 })
 ```
@@ -119,11 +120,11 @@ export default defineConfig({
 ### Port Allocation Reference:
 ```
 3000 - home
-3001 - landing-page
-3002 - dashboard
-3003 - game-2048
-3004 - your new project
-3005 - next project
+3001 - dashboard
+3002 - game-2048
+3003 - landing-page
+3004 - htop-monitor
+3005 - your new project
 ...
 ```
 
@@ -239,16 +240,16 @@ Edit `vercel.json` at root:
 
 ---
 
-## Step 9: Update Home Page (Dev Links)
+### Step 9: Verify Sidebar Navigation (Local Dev)
 
-Edit `apps/home/src/app/page.tsx` and add your port:
+The `IDELayout` in `@mono/ui` automatically uses the `devUrl` from `packages/projects/src/index.ts` when detecting a development environment. Make sure your `devUrl` matches your assigned port:
 
 ```typescript
-const DEV_PORTS: Record<string, number> = {
-  'landing-page': 3001,
-  'dashboard': 3002,
-  'game-2048': 3003,
-  'my-new-project': 3004, // Add this line
+// packages/projects/src/index.ts
+{
+  id: 'my-new-project',
+  devUrl: 'http://localhost:3005',
+  // ...
 }
 ```
 

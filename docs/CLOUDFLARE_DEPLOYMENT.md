@@ -23,7 +23,8 @@ yourname.pages.dev/
 ├── /                    → apps/home (Next.js)
 ├── /landing-page        → apps/landing-page (Vite)
 ├── /dashboard           → apps/dashboard (Next.js)
-└── /game-2048           → apps/game-2048 (Vite)
+├── /game-2048           → apps/game-2048 (Vite)
+└── /htop-monitor        → apps/htop-monitor (Vite)
 ```
 
 ---
@@ -78,6 +79,10 @@ For each additional app, create a separate Cloudflare Pages project:
 - Build command: `pnpm --filter @mono/game-2048 build`
 - Build output directory: `apps/game-2048/dist`
 
+**System Monitor App (htop-monitor):**
+- Build command: `pnpm --filter @mono/htop-monitor build`
+- Build output directory: `apps/htop-monitor/dist`
+
 ---
 
 ## Custom Domain Setup
@@ -115,6 +120,9 @@ export default {
     } else if (path.startsWith('/game-2048')) {
       // Game project
       return fetch('https://mono-repo-game.pages.dev' + path)
+    } else if (path.startsWith('/htop-monitor')) {
+      // System monitor project
+      return fetch('https://mono-repo-htop.pages.dev' + path)
     } else {
       // Home project (default)
       return fetch('https://mono-repo.pages.dev' + path)
@@ -184,6 +192,7 @@ If you have an existing Vercel deployment:
 | landing-page | `pnpm --filter @mono/landing-page build` | `apps/landing-page/dist` |
 | dashboard | `pnpm --filter @mono/dashboard build` | `apps/dashboard/.next` |
 | game-2048 | `pnpm --filter @mono/game-2048 build` | `apps/game-2048/dist` |
+| htop-monitor | `pnpm --filter @mono/htop-monitor build` | `apps/htop-monitor/dist` |
 
 ---
 
