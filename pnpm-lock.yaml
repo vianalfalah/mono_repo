@@ -234,6 +234,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@mono/projects':
+        specifier: workspace:*
+        version: link:../projects
       '@radix-ui/react-slot':
         specifier: ^1.1.1
         version: 1.2.4(@types/react@19.2.14)(react@19.2.4)
@@ -259,6 +262,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.0.2
         version: 19.2.3(@types/react@19.2.14)
+      next:
+        specifier: ^15.1.6
+        version: 15.5.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: ^19.0.0
         version: 19.2.4

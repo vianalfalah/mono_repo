@@ -1,7 +1,7 @@
 'use client'
 
 import { getProjectsExcludeHome } from '@mono/projects'
-import { Button } from '@mono/ui'
+import { Navigation } from '@mono/ui'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@mono/ui'
 import { Badge } from '@mono/ui'
 
@@ -20,8 +20,10 @@ export default function HomePage() {
   const isDev = isDevelopment()
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
-      <div className="container mx-auto px-4 py-16">
+    <>
+      <Navigation />
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+        <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-slate-100 dark:to-slate-400">
@@ -44,6 +46,8 @@ export default function HomePage() {
             const devUrl = isDev && DEV_PORTS[project.id]
               ? `http://localhost:${DEV_PORTS[project.id]}`
               : null
+            const prodUrl = project.externalUrl || project.path
+            const url = devUrl || prodUrl
 
             return (
               <Card
@@ -87,23 +91,22 @@ export default function HomePage() {
                       </Badge>
                     ))}
                   </div>
-                  {isDev && devUrl && (
+                  {!isDev && prodUrl && (
                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
-                      {devUrl}
+                      {prodUrl}
                     </p>
                   )}
                 </CardContent>
 
                 <CardFooter>
-                  <Button asChild className="w-full" type="button">
-                    <a
-                      href={devUrl || project.path}
-                      target={devUrl ? '_blank' : undefined}
-                      rel={devUrl ? 'noopener noreferrer' : undefined}
-                    >
-                      View Project →
-                    </a>
-                  </Button>
+                  <a
+                    href={url}
+                    target={project.externalUrl ? '_blank' : undefined}
+                    rel={project.externalUrl ? 'noopener noreferrer' : undefined}
+                    className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
+                  >
+                    View Project →
+                  </a>
                 </CardFooter>
               </Card>
             )
@@ -116,5 +119,6 @@ export default function HomePage() {
         </footer>
       </div>
     </main>
+    </>
   )
 }
