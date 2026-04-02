@@ -11,6 +11,8 @@ For detailed guides and documentation, see the **[docs/](./docs/README.md)** fol
 | [New Project](./docs/NEW_PROJECT.md) | Create a new project in the monorepo |
 | [Migrating](./docs/MIGRATING.md) | Migrate existing projects into the monorepo |
 | [Shared Packages](./docs/SHARED_PACKAGES.md) | Use and extend shared packages |
+| [Deployment](./docs/DEPLOYMENT.md) | Deploy to Vercel |
+| [Port Assignments](./docs/PORTS.md) | Development port reference |
 | [Changelog](./CHANGELOG.md) | Version history and updates |
 
 ---
