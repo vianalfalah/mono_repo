@@ -83,7 +83,6 @@ export function IDELayout({ children, activePath = '/', appName = 'app' }: IDELa
                       key={project.id}
                       href={href}
                       className={`flex items-center gap-2 px-8 py-1.5 cursor-pointer hover:bg-[#2a2d2e] ${isActive ? 'bg-[#37373d] text-white' : 'opacity-80'}`}
-                      target={(!isDev && project.externalUrl) ? "_blank" : "_self"}
                     >
                       <span className="opacity-60 text-xs">ts</span> {project.name.toLowerCase().replace(/\s+/g, '-')}
                     </a>

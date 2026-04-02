@@ -12,26 +12,14 @@ function isDevelopment(): boolean {
 }
 
 function NavLink({ project, isDev, onClick }: { project: Project; isDev: boolean; onClick?: () => void }) {
-  const href = isDev ? project.path : (project.externalUrl || project.path)
+  const href = isDev && project.devUrl ? project.devUrl : (project.externalUrl || project.path)
   const isExternal = !!project.externalUrl && !isDev
-
-  if (isExternal) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
-        onClick={onClick}
-      >
-        {project.name}
-      </a>
-    )
-  }
 
   return (
     <a
       href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className={`text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors ${project.path === href ? 'font-bold underline' : ''}`}
       onClick={onClick}
     >
