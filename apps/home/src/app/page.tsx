@@ -1,7 +1,6 @@
 'use client'
 
 import { getProjectsExcludeHome } from '@mono/projects'
-import { Navigation } from '@mono/ui'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@mono/ui'
 import { Badge } from '@mono/ui'
 
@@ -21,19 +20,18 @@ export default function HomePage() {
 
   return (
     <>
-      <Navigation />
-      <main className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+      <main className="min-h-full py-8 text-foreground w-full flex justify-center">
         <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-slate-100 dark:to-slate-400">
-            My Projects
+          <h1 className="text-4xl font-bold tracking-tight mb-4 text-primary">
+            ~/projects
           </h1>
           <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             A collection of web applications, games, and experiments
           </p>
           {isDev && (
-            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-200 rounded-lg text-sm">
+            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-yellow-900/30 text-yellow-500 border border-yellow-900/50 rounded-none text-xs">
               <span className="font-medium">Development Mode:</span>
               <span>Projects open on different ports</span>
             </div>
@@ -52,7 +50,7 @@ export default function HomePage() {
             return (
               <Card
                 key={project.id}
-                className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                className="group hover:border-primary border border-border bg-card transition-none rounded-none"
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">

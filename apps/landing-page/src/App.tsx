@@ -1,29 +1,11 @@
 import { motion } from 'framer-motion'
-import { Button } from '@mono/ui'
+import { Button, IDELayout } from '@mono/ui'
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-purple-950 dark:via-pink-950 dark:to-blue-950">
-      {/* Navigation */}
-      <nav className="container mx-auto px-6 py-6">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between"
-        >
-          <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
-            Portfolio
-          </div>
-          <div className="flex gap-4">
-            <Button variant="ghost" asChild>
-              <a href="https://vian-project.pages.dev">Home</a>
-            </Button>
-            <Button asChild>
-              <a href="#contact">Contact</a>
-            </Button>
-          </div>
-        </motion.div>
-      </nav>
+    <IDELayout appName="Landing Page" activePath="/landing-page">
+      <div className="flex flex-col min-h-full py-8 text-foreground font-mono">
+
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20">
@@ -41,7 +23,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600"
+            className="text-4xl font-bold mb-6 text-primary"
           >
             Welcome to My Portfolio
           </motion.h1>
@@ -106,7 +88,7 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="p-6 rounded-2xl bg-white/50 dark:bg-white/5 backdrop-blur border border-white/20 hover:border-purple-400/50 transition-colors"
+              className="p-6 border border-border bg-card rounded-none"
             >
               <div className="text-5xl mb-4">{feature.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -120,6 +102,7 @@ export default function LandingPage() {
       <footer className="container mx-auto px-6 py-10 text-center text-muted-foreground">
         <p>Built with Vite, React, Framer Motion, and Tailwind CSS</p>
       </footer>
-    </div>
+      </div>
+    </IDELayout>
   )
 }

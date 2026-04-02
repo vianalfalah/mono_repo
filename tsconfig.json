@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
@@ -19,6 +20,8 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "@mono/*": ["packages/*/src"]
-    }
-  }
+    },
+    "noEmit": true
+  },
+  "exclude": ["node_modules", "**/dist", "**/out", ".next", "**/postcss.config.js", "**/tailwind.config.js"]
 }

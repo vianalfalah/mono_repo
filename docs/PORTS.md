@@ -16,13 +16,14 @@ This document defines the fixed port assignments for all apps in development mod
 | 2 | dashboard | 3001 | Next.js | `apps/dashboard/package.json` |
 | 3 | game-2048 | 3002 | Vite | `apps/game-2048/vite.config.ts` |
 | 4 | landing-page | 3003 | Vite | `apps/landing-page/vite.config.ts` |
+| 5 | htop-monitor | 3004 | Vite | `apps/htop-monitor/vite.config.ts` |
 
 ## Adding a New App
 
 When adding a new app, use the next available port:
 
 ```bash
-# Next available port is 3004
+# Next available port is 3005
 ```
 
 ### For Next.js Apps
@@ -31,7 +32,7 @@ Update `package.json`:
 ```json
 {
   "scripts": {
-    "dev": "next dev -p 3004"
+    "dev": "next dev -p 3005"
   }
 }
 ```
@@ -43,7 +44,7 @@ Update `vite.config.ts`:
 export default defineConfig({
   // ...
   server: {
-    port: 3004,
+    port: 3005,
   },
 })
 ```
@@ -97,6 +98,7 @@ Check the app's configuration file:
 | dashboard | http://localhost:3001 | `/dashboard` |
 | game-2048 | http://localhost:3002 | `/game-2048` |
 | landing-page | http://localhost:3003 | `/landing-page` |
+| htop-monitor | http://localhost:3004 | `/htop-monitor` |
 
 ---
 

@@ -10,5 +10,6 @@ export interface Project {
   status: ProjectStatus
   githubUrl?: string
   externalUrl?: string
+  devUrl?: string
   featured?: boolean
 }

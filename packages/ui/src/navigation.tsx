@@ -1,15 +1,18 @@
 'use client'
 
-import Link from 'next/link'
 import { useState } from 'react'
 import { projects, type Project } from '@mono/projects'
 
 function isDevelopment(): boolean {
-  return process.env.NODE_ENV === 'development'
+  if (typeof process !== 'undefined') {
+    return process.env.NODE_ENV === 'development'
+  }
+  // @ts-ignore - Vite environment check
+  return import.meta.env?.DEV === true
 }
 
 function NavLink({ project, isDev, onClick }: { project: Project; isDev: boolean; onClick?: () => void }) {
-  const href = isDev && project.id !== 'home' ? project.path : (project.externalUrl || project.path)
+  const href = isDev ? project.path : (project.externalUrl || project.path)
   const isExternal = !!project.externalUrl && !isDev
 
   if (isExternal) {
@@ -27,13 +30,13 @@ function NavLink({ project, isDev, onClick }: { project: Project; isDev: boolean
   }
 
   return (
-    <Link
+    <a
       href={href}
-      className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+      className={`text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors ${project.path === href ? 'font-bold underline' : ''}`}
       onClick={onClick}
     >
       {project.name}
-    </Link>
+    </a>
   )
 }
 
@@ -46,10 +49,10 @@ export function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo / Brand */}
-          <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
+          <a href="/" className="flex items-center gap-2 font-semibold text-lg">
             <span className="text-2xl">🚀</span>
             <span>My Projects</span>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">

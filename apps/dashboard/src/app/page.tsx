@@ -10,34 +10,19 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-950 dark:to-blue-950">
-      {/* Top Navigation */}
-      <nav className="border-b bg-white/50 dark:bg-slate-900/50 backdrop-blur">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <a
-              href="https://vian-project.pages.dev"
-              className="text-sm text-muted-foreground hover:text-foreground"
-            >
-              ← Back to Home
-            </a>
-            <h1 className="text-xl font-bold">Analytics Dashboard</h1>
-          </div>
-          <Badge variant="outline">Live Demo</Badge>
-        </div>
-      </nav>
+    <div className="min-h-full py-8 px-4 flex justify-center text-foreground font-mono">
 
       <div className="container mx-auto px-4 py-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat) => (
-            <Card key={stat.label}>
+            <Card key={stat.label} className="border border-border rounded-none shadow-none bg-background">
               <CardHeader className="pb-2">
-                <CardDescription>{stat.label}</CardDescription>
-                <CardTitle className="text-3xl">{stat.value}</CardTitle>
+                <CardDescription className="opacity-70">{stat.label}</CardDescription>
+                <CardTitle className="text-3xl text-primary">{stat.value}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-xs text-muted-foreground">{stat.change}</p>
+                <p className="text-xs opacity-60">{stat.change}</p>
               </CardContent>
             </Card>
           ))}
@@ -46,10 +31,10 @@ export default function DashboardPage() {
         {/* Charts Section */}
         <div className="grid lg:grid-cols-2 gap-6 mb-8">
           {/* Traffic Chart */}
-          <Card>
+          <Card className="border border-border rounded-none shadow-none bg-background">
             <CardHeader>
-              <CardTitle>Traffic Overview</CardTitle>
-              <CardDescription>Daily visitors for the past 7 days</CardDescription>
+              <CardTitle className="text-primary">Traffic Overview</CardTitle>
+              <CardDescription className="opacity-70">Daily visitors for the past 7 days</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-64 flex items-end justify-between gap-2">
@@ -75,10 +60,10 @@ export default function DashboardPage() {
           </Card>
 
           {/* Projects by Status */}
-          <Card>
+          <Card className="border border-border rounded-none shadow-none bg-background">
             <CardHeader>
-              <CardTitle>Projects Status</CardTitle>
-              <CardDescription>Distribution of project statuses</CardDescription>
+              <CardTitle className="text-primary">Projects Status</CardTitle>
+              <CardDescription className="opacity-70">Distribution of project statuses</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -104,10 +89,10 @@ export default function DashboardPage() {
         </div>
 
         {/* Recent Activity */}
-        <Card>
+        <Card className="border border-border rounded-none shadow-none bg-background">
           <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-            <CardDescription>Latest updates across your projects</CardDescription>
+            <CardTitle className="text-primary">Recent Activity</CardTitle>
+            <CardDescription className="opacity-70">Latest updates across your projects</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
