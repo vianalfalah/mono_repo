@@ -55,10 +55,10 @@ export const projects: Project[] = [
     description: 'A UNIX-like system monitoring dashboard',
     icon: '💻',
     path: '/htop-monitor',
-    externalUrl: '',
+    externalUrl: 'https://mono-repo-htop.pages.dev',
     devUrl: 'http://localhost:3004',
     tech: ['Vite', 'React', 'Tailwind', 'TypeScript'],
-    status: 'wip',
+    status: 'live',
     featured: true,
   },
 ]
