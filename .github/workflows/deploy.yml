@@ -1,0 +1,189 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # Detect changes for home app
+  detect-home:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.changes.outputs.home }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            home:
+              - 'apps/home/**'
+              - 'packages/projects/**'
+              - 'packages/ui/**'
+              - 'packages/utils/**'
+
+  # Deploy home app
+  deploy-home:
+    needs: detect-home
+    if: needs.detect-home.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build home app
+        run: |
+          cd apps/home
+          pnpm run pages:build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy .vercel/output/static --project-name=vian-project
+
+  # Detect changes for dashboard app
+  detect-dashboard:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.changes.outputs.dashboard }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            dashboard:
+              - 'apps/dashboard/**'
+              - 'packages/ui/**'
+              - 'packages/utils/**'
+
+  # Deploy dashboard app
+  deploy-dashboard:
+    needs: detect-dashboard
+    if: needs.detect-dashboard.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build dashboard app
+        run: |
+          cd apps/dashboard
+          pnpm run pages:build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy .vercel/output/static --project-name=mono-repo-dashboard
+
+  # Detect changes for landing-page app
+  detect-landing:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.changes.outputs.landing }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            landing:
+              - 'apps/landing-page/**'
+              - 'packages/ui/**'
+              - 'packages/utils/**'
+
+  # Deploy landing-page app
+  deploy-landing:
+    needs: detect-landing
+    if: needs.detect-landing.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build landing-page app
+        run: |
+          cd apps/landing-page
+          pnpm run build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=mono-repo-landing
+
+  # Detect changes for game-2048 app
+  detect-game:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.changes.outputs.game }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            game:
+              - 'apps/game-2048/**'
+              - 'packages/ui/**'
+              - 'packages/utils/**'
+
+  # Deploy game-2048 app
+  deploy-game:
+    needs: detect-game
+    if: needs.detect-game.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build game-2048 app
+        run: |
+          cd apps/game-2048
+          pnpm run build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=mono-repo-game2048
