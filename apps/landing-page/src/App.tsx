@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import { Button, IDELayout } from '@mono/ui'
+import { Button } from '@mono/ui'
 
 export default function LandingPage() {
   return (
-    <IDELayout appName="Landing Page" activePath="/landing-page">
+    <main className="bg-[#0f0f0f] min-h-screen text-white">
       <div className="flex flex-col min-h-full py-8 text-foreground font-mono">
 
 
@@ -103,6 +103,6 @@ export default function LandingPage() {
         <p>Built with Vite, React, Framer Motion, and Tailwind CSS</p>
       </footer>
       </div>
-    </IDELayout>
+    </main>
   )
 }

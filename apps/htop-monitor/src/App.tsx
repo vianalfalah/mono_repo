@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { IDELayout } from '@mono/ui'
+
 
 export default function App() {
   const [cpuUsage, setCpuUsage] = useState<number[]>([12, 45, 23, 89, 56, 34, 12, 8])
@@ -20,7 +20,7 @@ export default function App() {
   }, [])
 
   return (
-    <IDELayout appName="System Monitor" activePath="/htop-monitor">
+    <div className="bg-[#1e1e1e] min-h-screen">
       <div className="p-6 w-full text-[#cccccc]">
         <div className="mb-6 border-b border-[#333333] pb-4">
           <h1 className="text-xl font-bold text-primary mb-2">htop - vian-portfolio.local</h1>
@@ -95,6 +95,6 @@ export default function App() {
           </div>
         </div>
       </div>
-    </IDELayout>
+    </div>
   )
 }

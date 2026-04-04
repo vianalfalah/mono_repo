@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { IDELayout } from '@mono/ui'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <IDELayout appName="Dashboard" activePath="/dashboard">
-          {children}
-        </IDELayout>
+        {children}
       </body>
     </html>
   )

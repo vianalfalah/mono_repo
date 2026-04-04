@@ -21,6 +21,9 @@ export function IDELayout({ children, activePath = '/', appName = 'app' }: IDELa
   const isDev = isDevelopment()
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
+  const [iframeUrl, setIframeUrl] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [currentAppName, setCurrentAppName] = useState(appName)
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,7 +47,7 @@ export function IDELayout({ children, activePath = '/', appName = 'app' }: IDELa
             <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
             <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
           </div>
-          <span className="opacity-70 text-sm">vian-portfolio — {appName}</span>
+          <span className="opacity-70 text-sm">vian-portfolio — {currentAppName}</span>
         </div>
         <button
           className="md:hidden opacity-80 hover:opacity-100"
@@ -76,12 +79,25 @@ export function IDELayout({ children, activePath = '/', appName = 'app' }: IDELa
               <div className="flex flex-col mt-1">
                 {projects.map((project: Project) => {
                   const href = isDev && project.devUrl ? project.devUrl : (project.externalUrl || project.path)
-                  const isActive = activePath === project.path || (activePath === '/' && project.path === '/')
+                  const isActive = (!iframeUrl && (activePath === project.path || (activePath === '/' && project.path === '/'))) || (iframeUrl === href)
+
+                  const handleClick = (e: React.MouseEvent) => {
+                    e.preventDefault()
+                    if (project.id === 'home') {
+                      setIframeUrl(null)
+                      setCurrentAppName('Home')
+                    } else {
+                      setIframeUrl(href)
+                      setIsLoading(true)
+                      setCurrentAppName(project.name)
+                    }
+                  }
 
                   return (
                     <a
                       key={project.id}
                       href={href}
+                      onClick={handleClick}
                       className={`flex items-center gap-2 px-8 py-1.5 cursor-pointer hover:bg-[#2a2d2e] ${isActive ? 'bg-[#37373d] text-white' : 'opacity-80'}`}
                     >
                       <span className="opacity-60 text-xs">ts</span> {project.name.toLowerCase().replace(/\s+/g, '-')}
@@ -100,9 +116,19 @@ export function IDELayout({ children, activePath = '/', appName = 'app' }: IDELa
             <div className="flex h-10 items-center justify-between border-t-2 border-primary bg-[#1e1e1e] px-4 min-w-[150px]">
               <div className="flex items-center">
                 <span className="mr-2 text-primary opacity-80 text-[10px] font-bold">TS</span>
-                <span className="whitespace-nowrap">{appName.toLowerCase().replace(/\s+/g, '-')}.tsx</span>
+                <span className="whitespace-nowrap">{currentAppName.toLowerCase().replace(/\s+/g, '-')}.tsx</span>
               </div>
-              <span className="ml-3 opacity-50 hover:opacity-100 cursor-pointer text-sm">×</span>
+              <span 
+                className="ml-3 opacity-50 hover:opacity-100 cursor-pointer text-sm" 
+                onClick={() => { 
+                  if(iframeUrl) { 
+                    setIframeUrl(null)
+                    setCurrentAppName('Home')
+                  } 
+                }}
+              >
+                ×
+              </span>
             </div>
           </div>
 
@@ -111,9 +137,27 @@ export function IDELayout({ children, activePath = '/', appName = 'app' }: IDELa
             {/* Minimalist Grid Background */}
             <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-            <div className="relative z-10 w-full min-h-full">
-              {children}
-            </div>
+            {iframeUrl ? (
+              <div className="relative z-10 w-full h-full flex flex-col">
+                {isLoading && (
+                  <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#1e1e1e]">
+                    <div className="flex flex-col items-center gap-4">
+                      <div className="w-8 h-8 rounded-full border-4 border-[#333333] border-t-primary animate-spin" />
+                      <span className="text-sm opacity-70">Loading {currentAppName}...</span>
+                    </div>
+                  </div>
+                )}
+                <iframe 
+                  src={iframeUrl} 
+                  className="w-full h-full border-none" 
+                  onLoad={() => setIsLoading(false)}
+                />
+              </div>
+            ) : (
+              <div className="relative z-10 w-full min-h-full">
+                {children}
+              </div>
+            )}
           </div>
         </div>
       </div>
